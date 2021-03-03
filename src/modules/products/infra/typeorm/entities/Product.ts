@@ -1,28 +1,35 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  OneToMany,
-} from 'typeorm';
+// import {
+//   Entity,
+//   Column,
+//   PrimaryGeneratedColumn,
+//   CreateDateColumn,
+//   UpdateDateColumn,
+//   OneToMany,
+// } from 'typeorm';
 
-import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
+// import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
 
-class Product {
-  id: string;
+// @Entity('products')
+// class Product {
+//   @PrimaryGeneratedColumn('uuid')
+//   id: string;
 
-  name: string;
+//   @Column()
+//   name: string;
 
-  price: number;
+//   @Column()
+//   price: number;
 
-  quantity: number;
+//   @Column()
+//   quantity: number;
 
-  order_products: OrdersProducts[];
+//   order_products: OrdersProducts[];
 
-  created_at: Date;
+//   @CreateDateColumn()
+//   created_at: Date;
 
-  updated_at: Date;
-}
+//   @UpdateDateColumn()
+//   updated_at: Date;
+// }
 
-export default Product;
+// export default Product;
