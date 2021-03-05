@@ -22,7 +22,7 @@ export default class AddCustomerIdToOrders1614984273526
       new TableForeignKey({
         name: 'OrdersCustumer',
         columnNames: ['costumer_id'],
-        referencedTableName: 'custumers',
+        referencedTableName: 'customers',
         referencedColumnNames: ['id'],
         onDelete: `SET NULL`,
       }),
