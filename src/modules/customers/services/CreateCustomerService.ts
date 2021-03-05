@@ -22,6 +22,14 @@ class CreateCustomerService {
       throw new AppError('Name or email is invalid');
     }
 
+    const emailAlreadyTaken = await this.customersRepository.findByEmail(email);
+
+    if (emailAlreadyTaken) {
+      throw new AppError(
+        `Email already taken, if you don't remenber your password, try recoveing it`,
+      );
+    }
+
     const newCostumer = await this.customersRepository.create({
       name,
       email,
