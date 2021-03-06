@@ -1,26 +1,26 @@
-// import {
-//   Entity,
-//   PrimaryGeneratedColumn,
-//   CreateDateColumn,
-//   UpdateDateColumn,
-//   ManyToOne,
-//   JoinColumn,
-//   OneToMany,
-// } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+} from 'typeorm';
 
-// import Customer from '@modules/customers/infra/typeorm/entities/Customer';
-// import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
+import Customer from '@modules/customers/infra/typeorm/entities/Customer';
+import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
 
-// class Order {
-//   id: string;
+class Order {
+  id: string;
 
-//   customer: Customer;
+  customer: Customer;
 
-//   order_products: OrdersProducts[];
+  order_products: OrdersProducts[];
 
-//   created_at: Date;
+  created_at: Date;
 
-//   updated_at: Date;
-// }
+  updated_at: Date;
+}
 
-// export default Order;
+export default Order;
