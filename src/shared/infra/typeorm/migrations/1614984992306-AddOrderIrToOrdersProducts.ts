@@ -9,7 +9,7 @@ export default class AddOrderIrToOrdersProducts1614984992306
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumn(
-      'order_products',
+      'orders_products',
       new TableColumn({
         name: 'order_id',
         type: 'uuid',
@@ -18,19 +18,19 @@ export default class AddOrderIrToOrdersProducts1614984992306
     );
 
     await queryRunner.createForeignKey(
-      'order_products',
+      'orders_products',
       new TableForeignKey({
         name: 'OrdersProductsOrder',
         columnNames: ['order_id'],
-        referencedTableName: 'orders',
         referencedColumnNames: ['id'],
+        referencedTableName: 'orders',
         onDelete: `SET NULL`,
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('order_products', 'OrdersProductsOrder');
-    await queryRunner.dropColumn('OrdersProductsOrder', 'order_id');
+    await queryRunner.dropForeignKey('orders_products', 'OrdersProductsOrder');
+    await queryRunner.dropColumn('orders_products', 'order_id');
   }
 }

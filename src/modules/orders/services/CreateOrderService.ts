@@ -31,7 +31,60 @@ class CreateOrderService {
   ) {}
 
   public async execute({ customer_id, products }: IRequest): Promise<Order> {
+    const custumerExists = await this.customersRepository.findById(customer_id);
 
+    if (!custumerExists) {
+      throw new AppError('Error finding the user');
+    }
+
+    const existentProducts = await this.productsRepository.findAllById(
+      products,
+    );
+
+    if (!existentProducts.length) {
+      throw new AppError('Could not find the products');
+    }
+
+    const existentProductsIds = existentProducts.map(product => product.id);
+    const checkInexistentProducts = products.filter(
+      product => !existentProductsIds.includes(product.id),
+    );
+
+    if (checkInexistentProducts.length) {
+      throw new AppError(`Could not  find products ${checkInexistentProducts}`);
+    }
+
+    const findProductsWithNoQuantityAvaliable = products.filter(
+      product =>
+        existentProducts.filter(prod => prod.id === product.id)[0].quantity <
+        product.quantity,
+    );
+
+    if (findProductsWithNoQuantityAvaliable.length) {
+      throw new AppError(`Products with no suficient stock avaliable`);
+    }
+
+    const serializedProducts = products.map(product => ({
+      product_id: product.id,
+      quantity: product.quantity,
+      price: existentProducts.filter(prod => prod.id === product.id)[0].price,
+    }));
+
+    const order = await this.ordersRepository.create({
+      customer: custumerExists,
+      products: serializedProducts,
+    });
+
+    const orderedProductsQuantity = products.map(product => ({
+      id: product.id,
+      quantity:
+        existentProducts.filter(prod => prod.id === product.id)[0].quantity -
+        product.quantity,
+    }));
+
+    await this.productsRepository.updateQuantity(orderedProductsQuantity);
+
+    return order;
   }
 }
 

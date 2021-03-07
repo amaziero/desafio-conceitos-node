@@ -5,7 +5,7 @@ export default class CreateOrdersProducts1614983991450
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'order_products',
+        name: 'orders_products',
         columns: [
           {
             name: 'id',
@@ -40,6 +40,6 @@ export default class CreateOrdersProducts1614983991450
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('orderProducts');
+    await queryRunner.dropTable('orders_products');
   }
 }
